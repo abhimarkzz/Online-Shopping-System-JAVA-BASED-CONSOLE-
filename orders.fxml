@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TextArea?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.shopping.controllers.OrdersController"
+            styleClass="root-pane">
+
+    <top>
+        <HBox styleClass="navbar" alignment="CENTER_LEFT" spacing="12">
+            <Button text="← Back to Shop"
+                    styleClass="btn-outline" onAction="#handleBackToShop" />
+            <Label text="📦  My Orders" styleClass="nav-brand" />
+            <HBox HBox.hgrow="ALWAYS" />
+            <Button text="💬  File a Complaint"
+                    styleClass="btn-outline" onAction="#handleComplaint" />
+        </HBox>
+    </top>
+
+    <center>
+        <VBox styleClass="content-area" spacing="14">
+
+            <Label text="Your Order History" styleClass="section-title" />
+
+            <TableView fx:id="ordersTable"
+                       VBox.vgrow="ALWAYS" styleClass="data-table">
+                <columns>
+                    <TableColumn fx:id="colOrderId"
+                                 text="Order ID" prefWidth="130" />
+                    <TableColumn fx:id="colDate"
+                                 text="Date" prefWidth="160" />
+                    <TableColumn fx:id="colItems"
+                                 text="Items" prefWidth="300" />
+                    <TableColumn fx:id="colTotal"
+                                 text="Total" prefWidth="100" />
+                    <TableColumn fx:id="colStatus"
+                                 text="Status" prefWidth="120" />
+                    <TableColumn fx:id="colAddress"
+                                 text="Shipping Address" prefWidth="220" />
+                </columns>
+            </TableView>
+
+            <VBox fx:id="detailPanel" styleClass="card" spacing="10"
+                  visible="false" managed="false">
+                <Label text="Order Details" styleClass="card-title" />
+                <Separator />
+                <TextArea fx:id="detailArea" editable="false"
+                          styleClass="detail-area"
+                          prefHeight="120" wrapText="true" />
+            </VBox>
+
+        </VBox>
+    </center>
+
+</BorderPane>

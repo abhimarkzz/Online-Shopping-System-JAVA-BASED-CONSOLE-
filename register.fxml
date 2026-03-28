@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Separator?>
+
+<StackPane xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.shopping.controllers.LoginController"
+           styleClass="root-pane">
+
+    <VBox styleClass="login-bg" />
+
+    <VBox alignment="CENTER_LEFT"
+          maxWidth="480"
+          styleClass="login-card"
+          spacing="0">
+
+        <VBox styleClass="login-header" alignment="CENTER" spacing="6">
+            <Label text="🛒" styleClass="logo-icon" />
+            <Label text="Create Account" styleClass="login-title" />
+            <Label text="Join us today" styleClass="login-subtitle" />
+        </VBox>
+
+        <VBox styleClass="login-body" spacing="10">
+
+            <HBox spacing="10">
+                <VBox spacing="4" HBox.hgrow="ALWAYS">
+                    <Label text="Username *" styleClass="field-label" />
+                    <TextField fx:id="regUsernameField"
+                               promptText="Choose a username"
+                               styleClass="input-field" />
+                </VBox>
+                <VBox spacing="4" HBox.hgrow="ALWAYS">
+                    <Label text="Full Name *" styleClass="field-label" />
+                    <TextField fx:id="regFullNameField"
+                               promptText="Your full name"
+                               styleClass="input-field" />
+                </VBox>
+            </HBox>
+
+            <Label text="Email *" styleClass="field-label" />
+            <TextField fx:id="regEmailField"
+                       promptText="you@example.com"
+                       styleClass="input-field" />
+
+            <HBox spacing="10">
+                <VBox spacing="4" HBox.hgrow="ALWAYS">
+                    <Label text="Password *" styleClass="field-label" />
+                    <PasswordField fx:id="regPasswordField"
+                                   promptText="Min 4 characters"
+                                   styleClass="input-field" />
+                </VBox>
+                <VBox spacing="4" HBox.hgrow="ALWAYS">
+                    <Label text="Phone" styleClass="field-label" />
+                    <TextField fx:id="regPhoneField"
+                               promptText="Phone number"
+                               styleClass="input-field" />
+                </VBox>
+            </HBox>
+
+            <Label text="Address" styleClass="field-label" />
+            <TextArea fx:id="regAddressField"
+                      promptText="Your shipping address"
+                      styleClass="input-field"
+                      prefHeight="60"
+                      wrapText="true" />
+
+            <Label fx:id="regErrorLabel"
+                   styleClass="error-label"
+                   wrapText="true"
+                   text="" />
+
+            <Button text="Create Account"
+                    styleClass="btn-primary"
+                    onAction="#handleCreateAccount"
+                    maxWidth="Infinity" />
+
+            <Separator />
+
+            <HBox alignment="CENTER" spacing="6">
+                <Label text="Already have an account?" styleClass="hint-text" />
+                <Hyperlink text="Sign In"
+                           onAction="#handleBackToLogin"
+                           styleClass="link-text" />
+            </HBox>
+
+        </VBox>
+    </VBox>
+
+</StackPane>

@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.ComboBox?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.shopping.controllers.AdminController"
+            styleClass="root-pane">
+
+    <top>
+        <HBox styleClass="navbar" alignment="CENTER_LEFT" spacing="12">
+            <Button text="← Back to Shop"
+                    styleClass="btn-outline" onAction="#handleBackToShop" />
+            <Label text="⚙  Admin Dashboard" styleClass="nav-brand" />
+            <HBox HBox.hgrow="ALWAYS" />
+            <Label fx:id="statsLabel" text="" styleClass="status-text" />
+        </HBox>
+    </top>
+
+    <center>
+        <TabPane fx:id="adminTabs"
+                 styleClass="tab-pane"
+                 tabClosingPolicy="UNAVAILABLE">
+
+            <!-- TAB 1: PRODUCTS -->
+            <Tab text="📦  Products">
+                <VBox styleClass="content-area" spacing="12">
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <Label text="Product Management"
+                               styleClass="section-title" />
+                        <HBox HBox.hgrow="ALWAYS" />
+                        <TextField fx:id="productSearchField"
+                                   promptText="Search products..."
+                                   styleClass="input-field"
+                                   prefWidth="220"
+                                   onAction="#handleProductSearch" />
+                        <Button text="🔍" styleClass="btn-icon"
+                                onAction="#handleProductSearch" />
+                        <Button text="+ Add New Product"
+                                styleClass="btn-primary"
+                                onAction="#handleAddProduct" />
+                    </HBox>
+
+                    <TableView fx:id="productsTable"
+                               VBox.vgrow="ALWAYS" styleClass="data-table">
+                        <columns>
+                            <TableColumn fx:id="pColId"
+                                         text="ID" prefWidth="50" />
+                            <TableColumn fx:id="pColName"
+                                         text="Name" prefWidth="200" />
+                            <TableColumn fx:id="pColCategory"
+                                         text="Category" prefWidth="120" />
+                            <TableColumn fx:id="pColPrice"
+                                         text="Price" prefWidth="90" />
+                            <TableColumn fx:id="pColQty"
+                                         text="Stock" prefWidth="70" />
+                            <TableColumn fx:id="pColRating"
+                                         text="Rating" prefWidth="70" />
+                            <TableColumn fx:id="pColEdit"
+                                         text="Edit" prefWidth="70" />
+                            <TableColumn fx:id="pColDelete"
+                                         text="Delete" prefWidth="70" />
+                        </columns>
+                    </TableView>
+
+                    <VBox styleClass="card" spacing="10">
+                        <Label fx:id="productFormTitle"
+                               text="Add New Product"
+                               styleClass="card-title" />
+                        <HBox spacing="10">
+                            <VBox HBox.hgrow="ALWAYS" spacing="4">
+                                <Label text="Name" styleClass="field-label" />
+                                <TextField fx:id="pNameField"
+                                           styleClass="input-field"
+                                           promptText="Product name" />
+                            </VBox>
+                            <VBox HBox.hgrow="ALWAYS" spacing="4">
+                                <Label text="Category"
+                                       styleClass="field-label" />
+                                <TextField fx:id="pCategoryField"
+                                           styleClass="input-field"
+                                           promptText="Category" />
+                            </VBox>
+                            <VBox spacing="4">
+                                <Label text="Price ($)"
+                                       styleClass="field-label" />
+                                <TextField fx:id="pPriceField"
+                                           styleClass="input-field"
+                                           prefWidth="100"
+                                           promptText="0.00" />
+                            </VBox>
+                            <VBox spacing="4">
+                                <Label text="Stock"
+                                       styleClass="field-label" />
+                                <TextField fx:id="pQtyField"
+                                           styleClass="input-field"
+                                           prefWidth="80"
+                                           promptText="0" />
+                            </VBox>
+                            <VBox spacing="4">
+                                <Label text="Rating"
+                                       styleClass="field-label" />
+                                <TextField fx:id="pRatingField"
+                                           styleClass="input-field"
+                                           prefWidth="80"
+                                           promptText="4.5" />
+                            </VBox>
+                        </HBox>
+                        <Label text="Description" styleClass="field-label" />
+                        <TextField fx:id="pDescField"
+                                   styleClass="input-field"
+                                   promptText="Short product description" />
+                        <HBox spacing="10" alignment="CENTER_LEFT">
+                            <Button fx:id="saveProductBtn"
+                                    text="💾  Save Product"
+                                    styleClass="btn-primary"
+                                    onAction="#handleSaveProduct" />
+                            <Button text="✖  Cancel"
+                                    styleClass="btn-danger-sm"
+                                    onAction="#handleCancelProduct" />
+                            <Label fx:id="productMsg"
+                                   styleClass="success-label" text="" />
+                        </HBox>
+                    </VBox>
+                </VBox>
+            </Tab>
+
+            <!-- TAB 2: ORDERS -->
+            <Tab text="🧾  Orders">
+                <VBox styleClass="content-area" spacing="12">
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <Label text="Order Management"
+                               styleClass="section-title" />
+                        <HBox HBox.hgrow="ALWAYS" />
+                        <Label fx:id="pendingLabel" text=""
+                               styleClass="badge-label" />
+                        <Button text="⚡  Process Next Pending"
+                                styleClass="btn-primary"
+                                onAction="#handleProcessNext" />
+                    </HBox>
+
+                    <TableView fx:id="ordersAdminTable"
+                               VBox.vgrow="ALWAYS" styleClass="data-table">
+                        <columns>
+                            <TableColumn fx:id="oColId"
+                                         text="Order ID" prefWidth="120" />
+                            <TableColumn fx:id="oColCustomer"
+                                         text="Customer" prefWidth="150" />
+                            <TableColumn fx:id="oColItems"
+                                         text="Items" prefWidth="230" />
+                            <TableColumn fx:id="oColTotal"
+                                         text="Total" prefWidth="90" />
+                            <TableColumn fx:id="oColStatus"
+                                         text="Status" prefWidth="110" />
+                            <TableColumn fx:id="oColDate"
+                                         text="Date" prefWidth="155" />
+                            <TableColumn fx:id="oColUpdate"
+                                         text="Update Status"
+                                         prefWidth="120" />
+                        </columns>
+                    </TableView>
+                </VBox>
+            </Tab>
+
+            <!-- TAB 3: CUSTOMERS -->
+            <Tab text="👥  Customers">
+                <VBox styleClass="content-area" spacing="12">
+                    <Label text="Customer Management"
+                           styleClass="section-title" />
+                    <TableView fx:id="customersTable"
+                               VBox.vgrow="ALWAYS" styleClass="data-table">
+                        <columns>
+                            <TableColumn fx:id="cColId"
+                                         text="ID" prefWidth="50" />
+                            <TableColumn fx:id="cColUsername"
+                                         text="Username" prefWidth="120" />
+                            <TableColumn fx:id="cColName"
+                                         text="Full Name" prefWidth="160" />
+                            <TableColumn fx:id="cColEmail"
+                                         text="Email" prefWidth="200" />
+                            <TableColumn fx:id="cColPhone"
+                                         text="Phone" prefWidth="120" />
+                            <TableColumn fx:id="cColAdmin"
+                                         text="Role" prefWidth="80" />
+                            <TableColumn fx:id="cColDate"
+                                         text="Registered" prefWidth="140" />
+                        </columns>
+                    </TableView>
+                </VBox>
+            </Tab>
+
+            <!-- TAB 4: COMPLAINTS -->
+            <Tab text="💬  Complaints">
+                <VBox styleClass="content-area" spacing="12">
+                    <HBox spacing="10" alignment="CENTER_LEFT">
+                        <Label text="Complaint Management"
+                               styleClass="section-title" />
+                        <HBox HBox.hgrow="ALWAYS" />
+                        <Button text="⚡  Process Next Open Complaint"
+                                styleClass="btn-primary"
+                                onAction="#handleProcessComplaint" />
+                    </HBox>
+                    <TableView fx:id="complaintsAdminTable"
+                               VBox.vgrow="ALWAYS" styleClass="data-table">
+                        <columns>
+                            <TableColumn fx:id="cmColId"
+                                         text="Complaint ID" prefWidth="110" />
+                            <TableColumn fx:id="cmColCustomer"
+                                         text="Customer" prefWidth="130" />
+                            <TableColumn fx:id="cmColSubject"
+                                         text="Subject" prefWidth="210" />
+                            <TableColumn fx:id="cmColOrder"
+                                         text="Order ID" prefWidth="110" />
+                            <TableColumn fx:id="cmColStatus"
+                                         text="Status" prefWidth="110" />
+                            <TableColumn fx:id="cmColDate"
+                                         text="Date" prefWidth="155" />
+                            <TableColumn fx:id="cmColResolve"
+                                         text="Resolve" prefWidth="90" />
+                        </columns>
+                    </TableView>
+                </VBox>
+            </Tab>
+
+            <!-- TAB 5: DSA DEMO -->
+            <Tab text="🔬  DSA Demo">
+                <VBox styleClass="content-area" spacing="14">
+                    <Label text="Data Structures and Algorithms Visualizer"
+                           styleClass="section-title" />
+                    <HBox spacing="12" alignment="CENTER_LEFT">
+                        <ComboBox fx:id="dsaAlgoCombo"
+                                  promptText="Select Algorithm"
+                                  prefWidth="200" />
+                        <ComboBox fx:id="dsaSortFieldCombo"
+                                  promptText="Sort By Field"
+                                  prefWidth="160" />
+                        <Button text="▶  Run"
+                                styleClass="btn-primary"
+                                onAction="#handleDsaRun" />
+                        <Label fx:id="dsaTimeLabel"
+                               styleClass="success-label" text="" />
+                    </HBox>
+                    <TextArea fx:id="dsaOutputArea"
+                              VBox.vgrow="ALWAYS"
+                              editable="false"
+                              styleClass="detail-area"
+                              wrapText="false"
+                              style="-fx-font-family:'Courier New',monospace;-fx-font-size:12px;" />
+                </VBox>
+            </Tab>
+
+        </TabPane>
+    </center>
+
+</BorderPane>

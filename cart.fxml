@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.shopping.controllers.CartController"
+            styleClass="root-pane">
+
+    <top>
+        <HBox styleClass="navbar" alignment="CENTER_LEFT" spacing="12">
+            <Button text="← Back to Shop"
+                    styleClass="btn-outline" onAction="#handleBackToShop" />
+            <Label text="🛒  Shopping Cart" styleClass="nav-brand" />
+            <HBox HBox.hgrow="ALWAYS" />
+            <Button text="↩ Undo Last Add"
+                    styleClass="btn-outline" onAction="#handleUndo" />
+            <Button text="🗑 Clear Cart"
+                    styleClass="btn-danger-sm" onAction="#handleClearCart" />
+        </HBox>
+    </top>
+
+    <center>
+        <HBox spacing="20" styleClass="content-area">
+
+            <VBox HBox.hgrow="ALWAYS" spacing="10">
+                <Label text="Your Items" styleClass="section-title" />
+                <TableView fx:id="cartTable"
+                           VBox.vgrow="ALWAYS" styleClass="data-table">
+                    <columns>
+                        <TableColumn fx:id="colProduct"
+                                     text="Product" prefWidth="220" />
+                        <TableColumn fx:id="colCategory"
+                                     text="Category" prefWidth="110" />
+                        <TableColumn fx:id="colPrice"
+                                     text="Unit Price" prefWidth="100" />
+                        <TableColumn fx:id="colQty"
+                                     text="Qty" prefWidth="60" />
+                        <TableColumn fx:id="colSubtotal"
+                                     text="Subtotal" prefWidth="100" />
+                        <TableColumn fx:id="colAction"
+                                     text="Remove" prefWidth="80" />
+                    </columns>
+                </TableView>
+            </VBox>
+
+            <VBox styleClass="summary-panel" spacing="16" minWidth="280">
+                <Label text="Order Summary" styleClass="section-title" />
+                <Separator />
+                <HBox>
+                    <Label text="Items:" styleClass="summary-label" />
+                    <HBox HBox.hgrow="ALWAYS" />
+                    <Label fx:id="itemCountLabel" text="0"
+                           styleClass="summary-value" />
+                </HBox>
+                <HBox>
+                    <Label text="Subtotal:" styleClass="summary-label" />
+                    <HBox HBox.hgrow="ALWAYS" />
+                    <Label fx:id="subtotalLabel" text="$0.00"
+                           styleClass="summary-value" />
+                </HBox>
+                <HBox>
+                    <Label text="Shipping:" styleClass="summary-label" />
+                    <HBox HBox.hgrow="ALWAYS" />
+                    <Label text="FREE" styleClass="summary-value-green" />
+                </HBox>
+                <Separator />
+                <HBox>
+                    <Label text="TOTAL:" styleClass="summary-total-label" />
+                    <HBox HBox.hgrow="ALWAYS" />
+                    <Label fx:id="totalLabel" text="$0.00"
+                           styleClass="summary-total-value" />
+                </HBox>
+                <Button text="Proceed to Checkout →"
+                        styleClass="btn-primary" maxWidth="Infinity"
+                        onAction="#handleCheckout" />
+                <Button text="← Continue Shopping"
+                        styleClass="btn-outline" maxWidth="Infinity"
+                        onAction="#handleBackToShop" />
+            </VBox>
+
+        </HBox>
+    </center>
+
+</BorderPane>

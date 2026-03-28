@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.shopping.controllers.HomeController"
+            styleClass="root-pane">
+
+    <top>
+        <HBox styleClass="navbar" alignment="CENTER_LEFT" spacing="10">
+            <Label text="🛒 ShopEasy" styleClass="nav-brand" />
+            <HBox HBox.hgrow="ALWAYS" />
+            <TextField fx:id="searchField"
+                       promptText="Search products..."
+                       styleClass="nav-search"
+                       prefWidth="300"
+                       onAction="#handleSearch" />
+            <Button text="🔍" styleClass="btn-icon" onAction="#handleSearch" />
+            <HBox HBox.hgrow="ALWAYS" />
+            <Button fx:id="cartBtn" text="🛒 Cart (0)"
+                    styleClass="btn-outline" onAction="#handleCart" />
+            <Button text="📦 Orders"
+                    styleClass="btn-outline" onAction="#handleOrders" />
+            <Button text="💬 Complaints"
+                    styleClass="btn-outline" onAction="#handleComplaints" />
+            <Button fx:id="adminBtn" text="⚙ Admin"
+                    styleClass="btn-outline" onAction="#handleAdmin"
+                    visible="false" managed="false" />
+            <Button text="Logout"
+                    styleClass="btn-danger-sm" onAction="#handleLogout" />
+        </HBox>
+    </top>
+
+    <left>
+        <VBox styleClass="sidebar" spacing="6" prefWidth="200">
+            <Label text="BROWSE" styleClass="sidebar-title" />
+            <Button text="🏠  All Products"
+                    styleClass="sidebar-btn sidebar-btn-active"
+                    maxWidth="Infinity"
+                    onAction="#handleAllProducts" />
+            <Separator />
+            <Label text="SORT BY" styleClass="sidebar-title" />
+            <ComboBox fx:id="sortFieldCombo"
+                      styleClass="combo-field" maxWidth="Infinity" />
+            <ComboBox fx:id="sortAlgoCombo"
+                      styleClass="combo-field" maxWidth="Infinity" />
+            <Button text="Apply Sort"
+                    styleClass="btn-primary-sm" maxWidth="Infinity"
+                    onAction="#handleSort" />
+            <Separator />
+            <Label text="FILTER PRICE" styleClass="sidebar-title" />
+            <HBox spacing="6">
+                <TextField fx:id="minPriceField" promptText="Min $"
+                           styleClass="input-field-sm" prefWidth="82" />
+                <TextField fx:id="maxPriceField" promptText="Max $"
+                           styleClass="input-field-sm" prefWidth="82" />
+            </HBox>
+            <Button text="Apply Filter"
+                    styleClass="btn-outline-sm" maxWidth="Infinity"
+                    onAction="#handlePriceFilter" />
+            <Separator />
+            <Label text="CATEGORIES" styleClass="sidebar-title" />
+            <VBox fx:id="categoryBox" spacing="4" />
+        </VBox>
+    </left>
+
+    <center>
+        <VBox styleClass="content-area" spacing="12">
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <Label fx:id="resultLabel" text="All Products"
+                       styleClass="section-title" />
+                <HBox HBox.hgrow="ALWAYS" />
+                <Label fx:id="countLabel" text="" styleClass="count-label" />
+            </HBox>
+            <ScrollPane fitToWidth="true" styleClass="scroll-pane"
+                        VBox.vgrow="ALWAYS">
+                <FlowPane fx:id="productGrid"
+                          hgap="16" vgap="16"
+                          styleClass="product-grid"
+                          prefWrapLength="860" />
+            </ScrollPane>
+        </VBox>
+    </center>
+
+    <bottom>
+        <HBox styleClass="status-bar" spacing="20" alignment="CENTER_LEFT">
+            <Label fx:id="welcomeLabel" text="" styleClass="status-text" />
+            <HBox HBox.hgrow="ALWAYS" />
+            <Label fx:id="cartTotalLabel" text="" styleClass="status-text" />
+        </HBox>
+    </bottom>
+
+</BorderPane>
